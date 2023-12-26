@@ -3,7 +3,7 @@
 filesdir=$1
 searchstr=$2
 
-if [ $# -eq 0 ]
+if [ $# -lt 2 ]
 then
     echo "Error. Usage: finder.sh <filesdir> <searchstring> "
     exit 1
