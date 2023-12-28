@@ -1,6 +1,6 @@
 TARGET_PREFIX :=  aarch64-none-linux-gnu-
 
-build: writer.o check_var
+all: clean writer.o check_var
 	@echo "Linking writer"
 	$(COMPILER) -Wall -o writer writer.o
 

@@ -5,7 +5,6 @@
 #include <syslog.h>
 
 #define MY_STRING_LIMIT 40
-FILE *writefile;
 
 /**
  * @brief
@@ -22,10 +21,11 @@ FILE *writefile;
 int main(int argc, char *argv[])
 {
 
+    FILE *writefile;
     char filepath[MY_STRING_LIMIT];
     char writestring[MY_STRING_LIMIT];
-    int size =0;
-
+    int size = 0;
+ 
     if (argc < 3)
     {
         printf("Usage: %s <writefile> <writestring>\n", argv[0]);
@@ -54,9 +54,13 @@ int main(int argc, char *argv[])
         exit(1);
     }
 
-    fclose(writefile);
+    if (fclose(writefile)) {
+        syslog(LOG_PERROR, "fclose");
+        exit(1);
+    }
 
     syslog(LOG_INFO, "Success!\n");
+    closelog(); /*man page says optional*/ 
     exit(0); 
 
 
